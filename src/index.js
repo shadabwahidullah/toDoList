@@ -1,26 +1,32 @@
 import _, { divide } from 'lodash'; // eslint-disable-line no-unused-vars
+import { statusUpdate } from './status';
 import './style.css';
 
-const toDoTasks = [
-  { desc: 'Reading a book', completed: true, index: 1 },
-  { desc: 'completing task', completed: true, index: 2 },
-  { desc: 'Climbing mountain', completed: true, index: 3 },
+export const toDoTasks = JSON.parse(localStorage.getItem('tasks')) || [
+  { desc: 'Reading a book', completed: true, index: 0 },
+  { desc: 'completing task', completed: true, index: 1 },
+  { desc: 'Climbing mountain', completed: true, index: 2 },
 ];
 
 const tasks = document.querySelector('.list');
 
+// creates a view for task e 
 function createTask(e) {
   const wrapper = document.createElement('div');
   wrapper.classList.add('list-item', 'flex-space-between');
 
   const element = document.createElement('div');
-  element.id = e.index;
   element.classList.add('flex');
 
   const checkBox = document.createElement('input');
   checkBox.type = 'checkbox';
+  checkBox.id = e.index;
   checkBox.classList.add('margin');
   checkBox.checked = e.completed;
+
+  checkBox.addEventListener('click',(event) => {
+    statusUpdate(event.target.id, event.target.checked);
+  });
 
   const task = document.createElement('input');
   task.type = 'text';
