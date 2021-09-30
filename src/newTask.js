@@ -18,11 +18,15 @@ export function editTask({ newDesc, index }) {
 export function deleteTask(index) {
   // delete task with specific index
   statusModule.toDoTasks.splice(index, 1);
-  // update indexes to be sequential
+  updateIndexes();
+  statusModule.updateLocalStorage();
+}
+
+// update indexes to be sequential
+export function updateIndexes() {
   let newIndex = 0;
   statusModule.toDoTasks.forEach((element) => {
     element.index = newIndex;
     newIndex++;
   });
-  statusModule.updateLocalStorage();
 }
