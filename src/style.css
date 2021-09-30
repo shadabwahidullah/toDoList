@@ -40,15 +40,15 @@ body {
   align-items: center;
 }
 
-.newTaskName{
+.newTaskName {
   width: 90%;
 }
 
-.list{
+.list {
   width: 100%;
 }
 
-.taskWidth{
+.taskWidth {
   width: 86%;
 }
 
@@ -88,9 +88,11 @@ body {
   align-items: center;
   justify-content: center;
 }
-.fa:hover{
+
+.fa:hover {
   color: black;
 }
-.hidden{
+
+.hidden {
   display: none;
 }

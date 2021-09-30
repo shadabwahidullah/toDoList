@@ -1,4 +1,4 @@
-import * as statusModule from "./status";
+import * as statusModule from './status';
 
 export function addNewTask(newTask) {
   statusModule.toDoTasks.push({
@@ -6,13 +6,22 @@ export function addNewTask(newTask) {
     completed: false,
     index: statusModule.toDoTasks.length,
   });
-  newTask.value = "";
+  newTask.value = '';
   statusModule.updateLocalStorage();
 }
 
 export function editTask({ newDesc, index }) {
   statusModule.toDoTasks[index].desc = newDesc;
   statusModule.updateLocalStorage();
+}
+
+// update indexes to be sequential
+export function updateIndexes() {
+  let newIndex = 0;
+  statusModule.toDoTasks.forEach((element) => {
+    element.index = newIndex;
+    newIndex += 1;
+  });
 }
 
 export function deleteTask(index) {
@@ -22,22 +31,11 @@ export function deleteTask(index) {
   statusModule.updateLocalStorage();
 }
 
-// update indexes to be sequential
-export function updateIndexes() {
-  let newIndex = 0;
-  statusModule.toDoTasks.forEach((element) => {
-    element.index = newIndex;
-    newIndex++;
-  });
-}
-
 // remove tasks with completed attribute set to true
 export function removeCompletedTasks() {
-  const temp = statusModule.toDoTasks.filter((t) => {
-    return !t.completed;
-  });
+  const temp = statusModule.toDoTasks.filter((t) => !t.completed);
   // empties Todo list
-  statusModule.toDoTasks.splice(0,statusModule.toDoTasks.length);
+  statusModule.toDoTasks.splice(0, statusModule.toDoTasks.length);
   // add uncompleted tasks back to Todo list
   temp.forEach((i) => {
     statusModule.toDoTasks.push(i);
