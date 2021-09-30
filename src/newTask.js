@@ -1,16 +1,26 @@
 import * as statusModule from "./status";
 
-const newForm = document.querySelector('.newTask');
+export function addNewTask(newTask) {
+  statusModule.toDoTasks.push({
+    desc: newTask.value,
+    completed: true,
+    index: statusModule.toDoTasks.length,
+  });
+  newTask.value = "";
+  statusModule.updateLocalStorage();
+}
 
-newForm.addEventListener('submit', (event) => {
-    const newTask = document.querySelector('.newTaskName');
-    event.preventDefault();
-    addNewTask({desc: newTask.value});
-    localStorage.setItem('tasks', JSON.stringify(statusModule.toDoTasks));
-    console.log(newTask.value);
-})
+export function editTask({ newDesc, index }) {
+  statusModule.toDoTasks[index].desc = newDesc;
+  statusModule.updateLocalStorage();
+}
 
-
-export function addNewTask({desc, completed = true, index = statusModule.toDoTasks.length}){
-    statusModule.toDoTasks.push({desc, completed, index});
+export function deleteTask(index) {
+  statusModule.toDoTasks.splice(index, 1);
+  let counter = 0;
+  statusModule.toDoTasks.forEach((element) => {
+    element.index = counter;
+    counter++;
+  });
+  statusModule.updateLocalStorage();
 }

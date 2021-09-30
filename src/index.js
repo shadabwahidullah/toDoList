@@ -1,4 +1,4 @@
-import _, { divide } from "lodash"; // eslint-disable-line no-unused-vars
+import _, { divide, padStart } from "lodash"; // eslint-disable-line no-unused-vars
 import * as statusModule from "./status";
 import * as newTaskModule from "./newTask";
 import "./style.css";
@@ -6,11 +6,6 @@ import "./style.css";
 const tasksWrapper = document.querySelector(".listWrapper");
 const tasks = document.querySelector(".list");
 const newForm = document.querySelector(".newTask");
-
-function updateLocalStorage() {
-  localStorage.setItem("tasks", JSON.stringify(toDoTasks));
-}
-function readLocalStorage() {}
 
 // creates a view for task t
 function createTask(t) {
@@ -36,7 +31,7 @@ function createTask(t) {
 
   const task = document.createElement("input");
   task.type = "text";
-  task.classList.add("text", "margin", 'taskWidth');
+  task.classList.add("text", "margin", "taskWidth");
   task.value = t.desc;
   task.readOnly = true;
 
@@ -45,6 +40,10 @@ function createTask(t) {
   element.addEventListener("submit", (event) => {
     event.preventDefault();
     task.readOnly = true;
+    newTaskModule.editTask({
+      newDesc: task.value,
+      index: event.target.parentElement.id,
+    });
   });
 
   const more = document.createElement("i");
@@ -63,6 +62,15 @@ function createTask(t) {
   deleteBtn.addEventListener("mouseout", () => {
     more.classList.remove("hidden");
     deleteBtn.classList.add("hidden");
+  });
+
+  deleteBtn.addEventListener('click',(event) => {
+    let parent = event.target.parentElement;
+    newTaskModule.deleteTask(parent.id);
+    parent.parentElement.innerHTML = "";
+    statusModule.toDoTasks.forEach((e) => {
+      createTask(e);
+    });
   });
 
   element.append(checkBox, task);
@@ -87,9 +95,8 @@ function clearAllBtn() {
 newForm.addEventListener("submit", (event) => {
   const newTask = document.querySelector(".newTaskName");
   event.preventDefault();
-  newTaskModule.addNewTask({ desc: newTask.value });
-  createTask(statusModule.toDoTasks[statusModule.toDoTasks.length-1]);
-  updateLocalStorage();
+  newTaskModule.addNewTask(newTask);
+  createTask(statusModule.toDoTasks[statusModule.toDoTasks.length - 1]);
 });
 
 clearAllBtn();
