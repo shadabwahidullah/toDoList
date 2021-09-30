@@ -5,6 +5,6 @@ export const toDoTasks = JSON.parse(localStorage.getItem('tasks')) || [
 ];
 
 export function statusUpdate(id, status) {
-  toDoTasks[id].completed = status;
+  this.toDoTasks[id].completed = status;
   localStorage.setItem('tasks', JSON.stringify(toDoTasks));
 }
