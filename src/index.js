@@ -7,6 +7,16 @@ const tasksWrapper = document.querySelector(".listWrapper");
 const tasks = document.querySelector(".list");
 const newForm = document.querySelector(".newTask");
 
+// empties the tasks element and refill it with
+// updated tasks
+function regenerateTasks() {
+  tasks.innerHTML = "";
+  // create all tasks again
+  statusModule.toDoTasks.forEach((e) => {
+    createTask(e);
+  });
+}
+
 // creates a view for task t
 function createTask(t) {
   const wrapper = document.createElement("div");
@@ -26,7 +36,7 @@ function createTask(t) {
       event.target.parentElement.parentElement.id,
       event.target.checked
     );
-    updateLocalStorage();
+    statusModule.updateLocalStorage();
   });
 
   const task = document.createElement("input");
@@ -64,13 +74,10 @@ function createTask(t) {
     deleteBtn.classList.add("hidden");
   });
 
-  deleteBtn.addEventListener('click',(event) => {
+  deleteBtn.addEventListener("click", (event) => {
     let parent = event.target.parentElement;
     newTaskModule.deleteTask(parent.id);
-    parent.parentElement.innerHTML = "";
-    statusModule.toDoTasks.forEach((e) => {
-      createTask(e);
-    });
+    regenerateTasks();
   });
 
   element.append(checkBox, task);
@@ -89,6 +96,11 @@ function clearAllBtn() {
   const btn = document.createElement("button");
   btn.classList.add("button");
   btn.innerHTML = "Clear All Completed";
+  btn.addEventListener("click", () => {
+    tasks.innerHTML = "";
+    newTaskModule.removeCompletedTasks();
+    regenerateTasks();
+  });
   tasksWrapper.appendChild(btn);
 }
 
