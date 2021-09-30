@@ -4,9 +4,9 @@ export function updateLocalStorage() {
 
 export function readLocalStorage() {
   return JSON.parse(localStorage.getItem('tasks')) || [
-    { desc: 'Reading a book', completed: true, index: 0 },
-    { desc: 'completing task', completed: true, index: 1 },
-    { desc: 'Climbing mountain', completed: true, index: 2 },
+    { desc: 'After Editing a task', completed: true, index: 0 },
+    { desc: 'press enter to save it', completed: true, index: 1 },
+    { desc: 'for delete hover on 3 dots', completed: true, index: 2 },
   ];
 }
 
