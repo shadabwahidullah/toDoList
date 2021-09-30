@@ -16,11 +16,13 @@ export function editTask({ newDesc, index }) {
 }
 
 export function deleteTask(index) {
+  // delete task with specific index
   statusModule.toDoTasks.splice(index, 1);
-  let counter = 0;
+  // update indexes to be sequential
+  let newIndex = 0;
   statusModule.toDoTasks.forEach((element) => {
-    element.index = counter;
-    counter++;
+    element.index = newIndex;
+    newIndex++;
   });
   statusModule.updateLocalStorage();
 }
