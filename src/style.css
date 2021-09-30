@@ -74,4 +74,11 @@ body {
   color: rgb(110, 106, 106);
   display: flex;
   align-items: center;
+  justify-content: center;
+}
+.fa:hover{
+  color: black;
+}
+.hidden{
+  display: none;
 }
