@@ -1,8 +1,16 @@
 import _, { divide } from "lodash"; // eslint-disable-line no-unused-vars
 import * as statusModule from "./status";
+import * as newTaskModule from "./newTask";
 import "./style.css";
 
+const tasksWrapper = document.querySelector(".listWrapper");
 const tasks = document.querySelector(".list");
+const newForm = document.querySelector(".newTask");
+
+function updateLocalStorage() {
+  localStorage.setItem("tasks", JSON.stringify(toDoTasks));
+}
+function readLocalStorage() {}
 
 // creates a view for task t
 function createTask(t) {
@@ -10,7 +18,7 @@ function createTask(t) {
   wrapper.classList.add("list-item", "flex-space-between");
   wrapper.id = t.index;
 
-  const element = document.createElement("div");
+  const element = document.createElement("form");
   element.classList.add("flex");
 
   const checkBox = document.createElement("input");
@@ -19,14 +27,25 @@ function createTask(t) {
   checkBox.checked = t.completed;
 
   checkBox.addEventListener("click", (event) => {
-    statusModule.statusUpdate(event.target.parentElement.parentElement.id, event.target.checked);
+    statusModule.statusUpdate(
+      event.target.parentElement.parentElement.id,
+      event.target.checked
+    );
+    updateLocalStorage();
   });
 
   const task = document.createElement("input");
   task.type = "text";
-  task.classList.add("text", "margin");
+  task.classList.add("text", "margin", 'taskWidth');
   task.value = t.desc;
   task.readOnly = true;
+
+  // add listener for task to be editable
+  task.addEventListener("click", () => (task.readOnly = false));
+  element.addEventListener("submit", (event) => {
+    event.preventDefault();
+    task.readOnly = true;
+  });
 
   const more = document.createElement("i");
   more.classList.add("fa", "fa-ellipsis-v", "fa-v", "fa-2x", "margin");
@@ -62,7 +81,15 @@ function clearAllBtn() {
   const btn = document.createElement("button");
   btn.classList.add("button");
   btn.innerHTML = "Clear All Completed";
-  tasks.appendChild(btn);
+  tasksWrapper.appendChild(btn);
 }
+
+newForm.addEventListener("submit", (event) => {
+  const newTask = document.querySelector(".newTaskName");
+  event.preventDefault();
+  newTaskModule.addNewTask({ desc: newTask.value });
+  createTask(statusModule.toDoTasks[statusModule.toDoTasks.length-1]);
+  updateLocalStorage();
+});
 
 clearAllBtn();
