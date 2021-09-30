@@ -1,31 +1,31 @@
 import _, { divide } from 'lodash'; // eslint-disable-line no-unused-vars
+import * as statusModule from './status';
 import './style.css';
-
-const toDoTasks = [
-  { desc: 'Reading a book', completed: true, index: 1 },
-  { desc: 'completing task', completed: true, index: 2 },
-  { desc: 'Climbing mountain', completed: true, index: 3 },
-];
 
 const tasks = document.querySelector('.list');
 
-function createTask(e) {
+// creates a view for task t
+function createTask(t) {
   const wrapper = document.createElement('div');
   wrapper.classList.add('list-item', 'flex-space-between');
 
   const element = document.createElement('div');
-  element.id = e.index;
   element.classList.add('flex');
 
   const checkBox = document.createElement('input');
   checkBox.type = 'checkbox';
+  checkBox.id = t.index;
   checkBox.classList.add('margin');
-  checkBox.checked = e.completed;
+  checkBox.checked = t.completed;
+
+  checkBox.addEventListener('click', (event) => {
+    statusModule.statusUpdate(event.target.id, event.target.checked);
+  });
 
   const task = document.createElement('input');
   task.type = 'text';
   task.classList.add('text', 'margin');
-  task.value = e.desc;
+  task.value = t.desc;
   task.readOnly = true;
 
   const more = document.createElement('i');
@@ -37,7 +37,7 @@ function createTask(e) {
   tasks.appendChild(wrapper);
 }
 
-toDoTasks.forEach((e) => {
+statusModule.toDoTasks.forEach((e) => {
   createTask(e);
 });
 
