@@ -4,7 +4,7 @@ export function addNewTask(newTask) {
   statusModule.toDoTasks.push({
     desc: newTask.value,
     completed: false,
-    index: statusModule.toDoTasks.length+1,
+    index: statusModule.toDoTasks.length + 1,
   });
   newTask.value = '';
   statusModule.updateLocalStorage();
