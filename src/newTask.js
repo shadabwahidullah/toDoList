@@ -4,7 +4,7 @@ export function addNewTask(newTask) {
   statusModule.toDoTasks.push({
     desc: newTask.value,
     completed: false,
-    index: statusModule.toDoTasks.length,
+    index: statusModule.toDoTasks.length+1,
   });
   newTask.value = '';
   statusModule.updateLocalStorage();
@@ -17,7 +17,7 @@ export function editTask({ newDesc, index }) {
 
 // update indexes to be sequential
 export function updateIndexes() {
-  let newIndex = 0;
+  let newIndex = 1;
   statusModule.toDoTasks.forEach((element) => {
     element.index = newIndex;
     newIndex += 1;
