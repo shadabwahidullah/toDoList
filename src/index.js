@@ -23,7 +23,7 @@ function createTask(t) {
 
   checkBox.addEventListener('click', (event) => {
     statusModule.statusUpdate(
-      event.target.parentElement.parentElement.id,
+      event.target.parentElement.parentElement.id - 1,
       event.target.checked,
     );
     statusModule.updateLocalStorage();
@@ -42,7 +42,7 @@ function createTask(t) {
     task.readOnly = true;
     newTaskModule.editTask({
       newDesc: task.value,
-      index: event.target.parentElement.id,
+      index: event.target.parentElement.id - 1,
     });
   });
 
@@ -66,7 +66,7 @@ function createTask(t) {
 
   deleteBtn.addEventListener('click', (event) => {
     const parent = event.target.parentElement;
-    newTaskModule.deleteTask(parent.id);
+    newTaskModule.deleteTask(parent.id-1);
     regenerateTasks(); // eslint-disable-line no-use-before-define
   });
 
