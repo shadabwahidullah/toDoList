@@ -2,15 +2,15 @@
  * @jest-environment jsdom
  */
 
-import { addNewTask } from './addTask';
+import addNewTask from './addTask';
+
 let spy;
 beforeAll(() => {
   spy = jest.spyOn(document, 'getElementById');
 });
 
 function creatingMockElem(number) {
-  let mockElem;
-  mockElem = document.createElement('input');
+  const mockElem = document.createElement('input');
   mockElem.type = 'text';
   mockElem.value = number;
   spy.mockReturnValue(mockElem);

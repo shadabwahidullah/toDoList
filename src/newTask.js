@@ -14,7 +14,6 @@ export function updateIndexes() {
   });
 }
 
-
 // remove tasks with completed attribute set to true
 export function removeCompletedTasks() {
   const temp = statusModule.toDoTasks.filter((t) => !t.completed);

@@ -1,20 +1,19 @@
-var localStorageMock = (function() {
-    var store = {};
+const localStorageMock = (function localSstorage() {
+  let store = {};
 
-    return {
-        getItem: function(key) {
-            return store[key] || null;
-        },
-        setItem: function(key, value) {
-            store[key] = value.toString();
-        },
-        clear: function() {
-            store = {};
-        }
-    };
-
-})();
+  return {
+    getItem(key) {
+      return store[key] || null;
+    },
+    setItem(key, value) {
+      store[key] = value.toString();
+    },
+    clear() {
+      store = {};
+    },
+  };
+}());
 
 Object.defineProperty(global, 'localStorage', {
-     value: localStorageMock
+  value: localStorageMock,
 });

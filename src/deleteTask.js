@@ -1,6 +1,6 @@
-import { updateLocalStorage } from "./status";
+import { updateLocalStorage } from './status';
 
-export function deleteTask(index, toDoTasks) {
+function deleteTask(index, toDoTasks) {
   // delete task with specific index
   toDoTasks.splice(index, 1);
   let newIndex = 1;
@@ -11,3 +11,5 @@ export function deleteTask(index, toDoTasks) {
   updateLocalStorage();
   return toDoTasks.length;
 }
+
+export default deleteTask;
