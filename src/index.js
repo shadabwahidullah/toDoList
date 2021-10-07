@@ -1,6 +1,8 @@
 import _, { divide, padStart } from 'lodash'; // eslint-disable-line no-unused-vars
 import * as statusModule from './status';
 import * as newTaskModule from './newTask';
+import addNewTask from './addTask';
+import deleteTask from './deleteTask';
 import './style.css';
 
 const tasksWrapper = document.querySelector('.listWrapper');
@@ -23,7 +25,7 @@ function createTask(t) {
 
   checkBox.addEventListener('click', (event) => {
     statusModule.statusUpdate(
-      event.target.parentElement.parentElement.id,
+      event.target.parentElement.parentElement.id - 1,
       event.target.checked,
     );
     statusModule.updateLocalStorage();
@@ -36,13 +38,15 @@ function createTask(t) {
   task.readOnly = true;
 
   // add listener for task to be editable
-  task.addEventListener('click', () => { task.readOnly = false; });
+  task.addEventListener('click', () => {
+    task.readOnly = false;
+  });
   element.addEventListener('submit', (event) => {
     event.preventDefault();
     task.readOnly = true;
     newTaskModule.editTask({
       newDesc: task.value,
-      index: event.target.parentElement.id,
+      index: event.target.parentElement.id - 1,
     });
   });
 
@@ -66,7 +70,7 @@ function createTask(t) {
 
   deleteBtn.addEventListener('click', (event) => {
     const parent = event.target.parentElement;
-    newTaskModule.deleteTask(parent.id);
+    deleteTask(parent.id - 1, statusModule.toDoTasks);
     regenerateTasks(); // eslint-disable-line no-use-before-define
   });
 
@@ -107,7 +111,7 @@ function clearAllBtn() {
 newForm.addEventListener('submit', (event) => {
   const newTask = document.querySelector('.newTaskName');
   event.preventDefault();
-  newTaskModule.addNewTask(newTask);
+  addNewTask(statusModule.toDoTasks, newTask);
   createTask(statusModule.toDoTasks[statusModule.toDoTasks.length - 1]);
 });
 

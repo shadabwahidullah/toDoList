@@ -15,6 +15,6 @@ export function updateLocalStorage() {
 }
 
 export function statusUpdate(id, status) {
-  this.toDoTasks[id].completed = status;
+  toDoTasks[id].completed = status;
   localStorage.setItem('tasks', JSON.stringify(toDoTasks));
 }

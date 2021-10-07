@@ -12,21 +12,22 @@
   <script defer src="main.js"></script></head>
   <body>
     <div class="container flex-h">
-      <div class="list flex-h">
+      <div class="listWrapper flex-h">
         <div class="title flex-space-between">
           <h2 class="margin">Today's To Do</h2>
-          <i class="fa fa-refresh fa-x"></i>
+          <i class="fa fa-refresh fa-x margin"></i>
         </div>
-        <div class="flex-space-between">
+        <form class="newTask flex-space-between">
           <input
-            class="text"
+            class="newTaskName text"
             placeholder="Add to your list"
             type="text"
             name=""
             id="newTask"
           />
-          <i class="fa fa-plus fa-x"></i>
-        </div>
+          <i class="fa fa-plus fa-x margin"></i>
+        </form>
+        <div class="list"></div>
       </div>
     </div>
   </body>
