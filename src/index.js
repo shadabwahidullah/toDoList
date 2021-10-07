@@ -70,7 +70,7 @@ function createTask(t) {
 
   deleteBtn.addEventListener("click", (event) => {
     const parent = event.target.parentElement;
-    deleteTask(parent.id - 1);
+    deleteTask(parent.id - 1, statusModule.toDoTasks);
     regenerateTasks(); // eslint-disable-line no-use-before-define
   });
 
@@ -111,7 +111,7 @@ function clearAllBtn() {
 newForm.addEventListener("submit", (event) => {
   const newTask = document.querySelector(".newTaskName");
   event.preventDefault();
-  addNewTask(newTask);
+  addNewTask(statusModule.toDoTasks, newTask);
   createTask(statusModule.toDoTasks[statusModule.toDoTasks.length - 1]);
 });
 

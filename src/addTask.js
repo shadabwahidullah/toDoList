@@ -1,6 +1,6 @@
-import { updateLocalStorage, toDoTasks } from "./status";
+import { updateLocalStorage} from "./status";
 
-export function addNewTask(newTask) {
+export function addNewTask(toDoTasks, newTask) {
   toDoTasks.push({
     desc: newTask.value,
     completed: false,
@@ -8,4 +8,5 @@ export function addNewTask(newTask) {
   });
   newTask.value = "";
   updateLocalStorage();
+  toDoTasks.length;
 }

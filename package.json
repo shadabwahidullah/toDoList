@@ -39,5 +39,9 @@
   },
   "dependencies": {
     "lodash": "^4.17.21"
+  },
+  
+  "jest":{
+    "setupFiles":["./src/browserMocks.js"]
   }
 }
