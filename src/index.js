@@ -27,6 +27,7 @@ function createTask(t) {
     statusModule.statusUpdate(
       event.target.parentElement.parentElement.id - 1,
       event.target.checked,
+      statusModule.toDoTasks,
     );
     statusModule.updateLocalStorage();
   });
@@ -47,6 +48,7 @@ function createTask(t) {
     newTaskModule.editTask({
       newDesc: task.value,
       index: event.target.parentElement.id - 1,
+      toDoTasks: statusModule.toDoTasks,
     });
   });
 
@@ -102,7 +104,7 @@ function clearAllBtn() {
   btn.innerHTML = 'Clear All Completed';
   btn.addEventListener('click', () => {
     tasks.innerHTML = '';
-    newTaskModule.removeCompletedTasks();
+    newTaskModule.removeCompletedTasks(statusModule.toDoTasks);
     regenerateTasks();
   });
   tasksWrapper.appendChild(btn);

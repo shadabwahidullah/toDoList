@@ -1,8 +1,9 @@
 import * as statusModule from './status';
 
-export function editTask({ newDesc, index }) {
-  statusModule.toDoTasks[index].desc = newDesc;
+export function editTask({ newDesc, index, toDoTasks }) {
+  toDoTasks[index].desc = newDesc;
   statusModule.updateLocalStorage();
+  return toDoTasks[index].desc;
 }
 
 // update indexes to be sequential
@@ -15,14 +16,16 @@ export function updateIndexes() {
 }
 
 // remove tasks with completed attribute set to true
-export function removeCompletedTasks() {
-  const temp = statusModule.toDoTasks.filter((t) => !t.completed);
+export function removeCompletedTasks(toDoTasks) {
+  const temp = toDoTasks.filter((t) => !t.completed);
+
   // empties Todo list
-  statusModule.toDoTasks.splice(0, statusModule.toDoTasks.length);
+  toDoTasks.splice(0, toDoTasks.length);
   // add uncompleted tasks back to Todo list
   temp.forEach((i) => {
-    statusModule.toDoTasks.push(i);
+    toDoTasks.push(i);
   });
   updateIndexes();
   statusModule.updateLocalStorage();
+  return toDoTasks.length;
 }
