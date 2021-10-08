@@ -1,8 +1,9 @@
 import * as statusModule from './status';
 
-export function editTask({ newDesc, index }) {
-  statusModule.toDoTasks[index].desc = newDesc;
+export function editTask({ newDesc, index, toDoTasks }) {
+  toDoTasks[index].desc = newDesc;
   statusModule.updateLocalStorage();
+  return toDoTasks[index].desc;
 }
 
 // update indexes to be sequential

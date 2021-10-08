@@ -47,6 +47,7 @@ function createTask(t) {
     newTaskModule.editTask({
       newDesc: task.value,
       index: event.target.parentElement.id - 1,
+      toDoTasks: statusModule.toDoTasks,
     });
   });
 
