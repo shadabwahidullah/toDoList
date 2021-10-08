@@ -27,7 +27,7 @@ function createTask(t) {
     statusModule.statusUpdate(
       event.target.parentElement.parentElement.id - 1,
       event.target.checked,
-      statusModule.toDoTasks
+      statusModule.toDoTasks,
     );
     statusModule.updateLocalStorage();
   });

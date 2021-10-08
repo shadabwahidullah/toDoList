@@ -1,4 +1,4 @@
-import { toDoTasks, statusUpdate } from './status';
+import { statusUpdate } from './status';
 
 describe('Completed status updated succesfully', () => {
   test('first status update', () => {
@@ -9,7 +9,6 @@ describe('Completed status updated succesfully', () => {
     const mockArr = [
       { desc: 'test', index: 1, completed: true },
       { desc: 'test', index: 2, completed: false },
-      ,
     ];
     expect(statusUpdate(1, true, mockArr)).toEqual(true);
   });

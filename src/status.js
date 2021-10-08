@@ -1,4 +1,3 @@
-
 export function readLocalStorage() {
   return (
     JSON.parse(localStorage.getItem('tasks')) || [

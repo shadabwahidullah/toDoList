@@ -1,4 +1,4 @@
-import * as statusModule from "./status";
+import * as statusModule from './status';
 
 export function editTask({ newDesc, index, toDoTasks }) {
   toDoTasks[index].desc = newDesc;
