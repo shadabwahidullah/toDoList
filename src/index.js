@@ -104,7 +104,7 @@ function clearAllBtn() {
   btn.innerHTML = 'Clear All Completed';
   btn.addEventListener('click', () => {
     tasks.innerHTML = '';
-    newTaskModule.removeCompletedTasks();
+    newTaskModule.removeCompletedTasks(statusModule.toDoTasks);
     regenerateTasks();
   });
   tasksWrapper.appendChild(btn);
