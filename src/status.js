@@ -1,3 +1,4 @@
+
 export function readLocalStorage() {
   return (
     JSON.parse(localStorage.getItem('tasks')) || [
@@ -14,7 +15,8 @@ export function updateLocalStorage() {
   localStorage.setItem('tasks', JSON.stringify(toDoTasks));
 }
 
-export function statusUpdate(id, status) {
+export function statusUpdate(id, status, toDoTasks) {
   toDoTasks[id].completed = status;
   localStorage.setItem('tasks', JSON.stringify(toDoTasks));
+  return toDoTasks[id].completed;
 }
